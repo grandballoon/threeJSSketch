@@ -10,6 +10,7 @@
 
   <body>
     <script src="js/three.min.js"></script>
+    <script src="js/OrbitControls.js"></script>
     <script>
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
@@ -24,7 +25,9 @@
         renderer.setSize(width, height);
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
-      })
+      });
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement)
 
       //geometry
       const box = new THREE.BoxGeometry(1, 1, 1);
