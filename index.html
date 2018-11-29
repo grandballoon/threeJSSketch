@@ -18,6 +18,14 @@
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
+      window.addEventListener('resize', function() {
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        renderer.setSize(width, height);
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+      })
+
       //geometry
       const box = new THREE.BoxGeometry(1, 1, 1);
 
