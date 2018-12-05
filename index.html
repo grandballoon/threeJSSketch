@@ -31,9 +31,19 @@
 
       //geometry
       const box = new THREE.BoxGeometry(1, 1, 1);
+      const cubeMaterials = [
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
+        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide})
+      ]
+
+
 
       //create a material
-      const material = new THREE.MeshBasicMaterial({color: 0xFFFFFF, wireframe: false});
+      const material = new THREE.MeshFaceMaterial(cubeMaterials);
 
       const cube = new THREE.Mesh(box, material);
       scene.add(cube);
