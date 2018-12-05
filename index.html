@@ -32,12 +32,12 @@
       //geometry
       const box = new THREE.BoxGeometry(1, 1, 1);
       const cubeMaterials = [
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
-        new THREE.MeshBasicMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide})
+        new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
+        new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
+        new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
+        new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
+        new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide}),
+        new THREE.MeshLambertMaterial({ map: new THREE.TextureLoader().load('img/insta.png'), side: THREE.DoubleSide})
       ]
 
 
@@ -50,10 +50,41 @@
 
       camera.position.z = 3;
 
+      const ambientLight = new THREE.AmbientLight(0xFFFFFF, 3.0);
+      // scene.add(ambientLight);
+
+      const light1 = new THREE.PointLight(0xFF0040, 4, 50);
+      scene.add(light1);
+
+      const light2 = new THREE.PointLight(0x0040FF, 4, 50);
+      scene.add(light2);
+
+      const light3 = new THREE.PointLight(0x80FF80, 4, 50);
+      scene.add(light3);
+
+      const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1);
+      directionalLight.position.set(0, 1, 0);
+      scene.add(directionalLight)
+
+      const spotLight = new THREE.SpotLight(0xFF9900, 25);
+      spotLight.position.set(0, 3, 0);
+      scene.add(spotLight)
+
       //game logic
       const update = function() {
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.05;
+        let time = Date.now() * 0.0005;
+
+        light1.position.x = Math.sin(time * 0.7) * 30;
+        light1.position.y = Math.cos(time * 0.5) * 40;
+        light1.position.z = Math.cos(time * 0.3) * 30;
+
+        light2.position.x = Math.cos(time * 0.3) * 30;
+        light2.position.y = Math.sin(time * 0.7) * 40;
+        light2.position.z = Math.sin(time * 0.3) * 30;
+
+        light3.position.x = Math.sin(time * 0.7) * 30;
+        light3.position.y = Math.cos(time * 0.3) * 40;
+        light3.position.z = Math.sin(time * 0.5) * 30;
       };
 
       const render = function() {
